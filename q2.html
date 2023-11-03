@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
     <title>Banco</title>
 </head>
 
 <body>
-<center>
   <h1>Banco</h1>
   <form id="formCliente">
-    <label>Nome:</label><br>
-    <input type="text" id="nome"><br><br>
-    <label>Documento:</label><br>
-    <input type="text" id="documento"><br><br>
-    <label>Saldo:</label><br>
-    <input type="number" id="saldo"><br><br>
-    <button type="submit">Adicionar Cliente</button><br>
+    <label>Nome:</label>
+    <input type="text" id="nome">
+    <label>Documento:</label>
+    <input type="text" id="documento">
+    <label>Saldo:</label>
+    <input type="number" id="saldo">
+    <button type="submit">Adicionar Cliente</button>
   </form>
   <ul id="Lista"></ul>
-</center>
 <script>
 class ClienteBanco {
   constructor(nome, documento, saldo) {
@@ -72,22 +72,24 @@ function criarCliente(cliente) {
   let botaoDepositar = criarBotao('+ 100', function() {
     cliente.depositar(100);
     atualizarLista();
-  });
+  }, 'button-mais'); 
   let botaoSacar = criarBotao('- 100', function() {
     cliente.sacar(100);
     atualizarLista();
-  });
+  }, 'button-menos'); 
   li.appendChild(botaoDepositar);
   li.appendChild(botaoSacar);
   return li;
 }
 
-function criarBotao(texto, acao) {
+function criarBotao(texto, acao, classe) {
   let botao = document.createElement('button');
   botao.textContent = texto;
   botao.addEventListener('click', acao);
+  botao.classList.add(classe); 
   return botao;
 }
+
 </script>
 </body>
 </html>

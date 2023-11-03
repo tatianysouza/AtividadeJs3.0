@@ -4,19 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
     <title>Lista de Eventos</title>
 </head>
 
 <body>
-<center>
-  <h1>Lista de Eventos</h1>
-  <label>Nome do Evento:</label><br>
-  <input type="text" id="evento"><br><br>
-  <label >Horário do Evento:</label><br>
-  <input type="datetime-local" id="data"><br><br>
-  <button id="adicionar">Adicionar</button><br>
-  <ul id="lista"></ul>
-</center>
+
+<h1>Lista de Eventos</h1>
+<label>Nome do Evento:</label>
+<input type="text" id="evento">
+<label >Horário do Evento:</label>
+<input type="datetime-local" id="data">
+<button id="adicionar">Adicionar</button>
+<ul id="lista"></ul>
+
 <script>
 document.getElementById('adicionar').addEventListener('click', adicionarEvento);
 var Eventos = [];
