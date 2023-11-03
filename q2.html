@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco</title>
+</head>
+
+<body>
+<center>
+  <h1>Banco</h1>
+  <form id="formCliente">
+    <label>Nome:</label><br>
+    <input type="text" id="nome"><br><br>
+    <label>Documento:</label><br>
+    <input type="text" id="documento"><br><br>
+    <label>Saldo:</label><br>
+    <input type="number" id="saldo"><br><br>
+    <button type="submit">Adicionar Cliente</button><br>
+  </form>
+  <ul id="Lista"></ul>
+</center>
+<script>
+class ClienteBanco {
+  constructor(nome, documento, saldo) {
+    this.nome = nome;
+    this.documento = documento;
+    this.saldo = saldo;
+  }
+
+  depositar(valor) {
+    this.saldo += valor;
+  }
+
+  sacar(valor) {
+    this.saldo -= valor;
+  }
+}
+
+let clientes = [];
+
+document.getElementById('formCliente').addEventListener('submit', function(event) {
+  event.preventDefault();
+  adicionarCliente();
+});
+
+function adicionarCliente() {
+  let nome = document.getElementById('nome').value;
+  let documento = document.getElementById('documento').value;
+  let saldo = parseInt(document.getElementById('saldo').value);
+  let cliente = new ClienteBanco(nome, documento, saldo);
+  clientes.push(cliente);
+  document.getElementById('nome').value = '';
+  document.getElementById('documento').value = '';
+  document.getElementById('saldo').value = '';
+  atualizarLista();
+}
+
+function atualizarLista() {
+  let Lista = document.getElementById('Lista');
+  Lista.innerHTML = '';
+  for (let cliente of clientes) {
+  let li = criarCliente(cliente);
+  Lista.appendChild(li);
+  }
+}
+
+function criarCliente(cliente) {
+  let li = document.createElement('li');
+  li.textContent = `Nome: ${cliente.nome}, Documento: ${cliente.documento}, Saldo: ${cliente.saldo}`;
+  let botaoDepositar = criarBotao('+ 100', function() {
+    cliente.depositar(100);
+    atualizarLista();
+  });
+  let botaoSacar = criarBotao('- 100', function() {
+    cliente.sacar(100);
+    atualizarLista();
+  });
+  li.appendChild(botaoDepositar);
+  li.appendChild(botaoSacar);
+  return li;
+}
+
+function criarBotao(texto, acao) {
+  let botao = document.createElement('button');
+  botao.textContent = texto;
+  botao.addEventListener('click', acao);
+  return botao;
+}
+</script>
+</body>
+</html>

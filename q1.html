@@ -8,14 +8,15 @@
 </head>
 
 <body>
+<center>
   <h1>Lista de Eventos</h1>
-  <label for="evento">Nome do Evento:</label><br>
+  <label>Nome do Evento:</label><br>
   <input type="text" id="evento"><br><br>
-  <label for="horario">Horário do Evento:</label><br>
+  <label >Horário do Evento:</label><br>
   <input type="datetime-local" id="data"><br><br>
   <button id="adicionar">Adicionar</button><br>
   <ul id="lista"></ul>
-
+</center>
 <script>
 document.getElementById('adicionar').addEventListener('click', adicionarEvento);
 var Eventos = [];
