@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transações</title>
+</head>
+
+<body>
+  <h1>Transações</h1>
+  <form>
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" required>
+    <label for="valor">Valor:</label>
+    <input type="number" id="valor" required>
+    <button type="submit" id="adicionar">Adicionar</button>
+  </form>
+  <table id="tabelaTransacoes">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <h2>Total: <span id="total"></span></h2>
+
+<script>
+class Transacao {
+  constructor(descricao, valor) {
+    this.descricao = descricao;
+    this.valor = valor;
+  }
+}
+
+let transacoes = [];
+
+document.getElementById('adicionar').addEventListener('click', function(event) {
+  event.preventDefault();
+  let descricao = document.getElementById('descricao').value;
+  let valor = parseFloat(document.getElementById('valor').value);
+  let transacao = new Transacao(descricao, valor);
+  transacoes.push(transacao);
+  document.getElementById('descricao').value = '';
+  document.getElementById('valor').value = '';
+  atualizarTabelaTransacoes();
+});
+
+function atualizarTabelaTransacoes() {
+  let tabela = document.getElementById('tabelaTransacoes').getElementsByTagName('tbody')[0];
+  tabela.innerHTML = '';
+  let total = 0;
+  for (let transacao of transacoes) {
+    let linha = tabela.insertRow();
+    let descricao = linha.insertCell(0);
+    let valorpix = linha.insertCell(1);
+    descricao.textContent = transacao.descricao;
+    valorpix.textContent = transacao.valor.toFixed(2);
+    if (transacao.valor < 0) {
+      valorpix.style.color = 'red';
+    } else {
+      valorpix.style.color = 'green';
+    }
+    total += transacao.valor;
+  }
+  document.getElementById('total').textContent = total.toFixed(2);
+}
+</script>
+</body>
+
+</html>
+
